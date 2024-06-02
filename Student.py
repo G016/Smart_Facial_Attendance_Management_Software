@@ -157,9 +157,11 @@ class Student:
         Gd_label.grid(row=1,column=0,sticky=W)
         Gd_label.place(x=10,y=60)
 
-        Gd_entry=ttk.Entry(Cs_frame,textvariable=self.var_Gender,width=18,font = ("times new roman",11,"bold"))
-        Gd_entry.grid(row=1,column=1,sticky=W)
-        Gd_entry.place(x=115,y=60)
+        Gd_combo = ttk.Combobox(Cs_frame,textvariable=self.var_Gender,font = ("times new roman",11,"bold"),state="readonly",width=18)
+        Gd_combo["values"]=("Select Gender","Male","Female","Others")
+        Gd_combo.current(0)   
+        Gd_combo.grid(row=1,column=1,sticky=W)
+        Gd_combo.place(x=115,y=60,width=150)
 
 
     #DOB Label
