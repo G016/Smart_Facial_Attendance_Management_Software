@@ -214,7 +214,7 @@ class Student:
         update_btn = Button(btn_frame,text="Update",command=self.update_data,width=14,font=("times new roman",11,"bold"),bg="red",fg="white")
         update_btn.grid(row=0,column=1)
 
-        delete_btn = Button(btn_frame,text="Delete",width=14,font=("times new roman",11,"bold"),bg="red",fg="white")
+        delete_btn = Button(btn_frame,text="Delete",command=self.delete_data,width=14,font=("times new roman",11,"bold"),bg="red",fg="white")
         delete_btn.grid(row=0,column=2)
 
         reset_btn = Button(btn_frame,text="Reset",width=14,font=("times new roman",11,"bold"),bg="red",fg="white")
@@ -400,6 +400,69 @@ class Student:
                 conn.close()
             except Exception as es:
                 messagebox.showerror("Error",f"Due To: {str(es)}",parent=self.root)
+                
+
+    #Delete Details
+    # def delete_data(self):
+    #     if self.var_Student_Name.get():
+    #         messagebox.showerror("Error","Student Name Must Be Required",parent=self.root)
+    #     else:
+    #         try:
+    #             Delete=messagebox.askyesno("Delete Student Details","Are you Sure You Want To Delete This Student Details?",parent=self.root)
+    #             if Delete>0:
+    #                 conn=mysql.connector.connect(host="localhost",username="root",password="Gaurav@716",database="face_recognition")
+    #                 my_cursor=conn.cursor()
+    #                 sql="DELETE FROM Student WHERE Student_Name=%s"
+    #                 val=(self.var_Student_Name.get(),)
+    #                 my_cursor.execute(sql,val)
+    #             else:
+    #                 if not Delete:
+    #                     return
+                    
+    #             conn.commit()
+    #             self.fetch_data()
+    #             conn.close()
+    #             messagebox.showinfo("Delete","Successfully Deleted Student Details")
+
+    #         except Exception as es:
+    #             messagebox.showerror("Error",f"Due To: {str(es)}",parent=self.root)
+
+
+
+
+
+
+
+
+        
+    def delete_data(self):
+        if self.var_Student_Name.get() == "":
+            messagebox.showerror("Error", "Roll No. is Required!")
+        else:
+            try:
+                conn = mysql.connector.connect(host="localhost", username="root", password="Gaurav@716", database="face_recognition")
+                my_cursor = conn.cursor()
+                sql = "DELETE FROM student WHERE `Student Name`=%s"
+                val = (self.var_Student_Name.get(),)
+                my_cursor.execute(sql, val)
+                conn.commit()
+                self.fetch_data()
+                conn.close()
+                messagebox.showinfo("Success", "Student details have been deleted successfully.")
+            except Exception as es:
+                messagebox.showerror("Error", f"Due To: {str(es)}")
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
