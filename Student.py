@@ -217,7 +217,7 @@ class Student:
         delete_btn = Button(btn_frame,text="Delete",command=self.delete_data,width=14,font=("times new roman",11,"bold"),bg="red",fg="white")
         delete_btn.grid(row=0,column=2)
 
-        reset_btn = Button(btn_frame,text="Reset",width=14,font=("times new roman",11,"bold"),bg="red",fg="white")
+        reset_btn = Button(btn_frame,text="Reset",command=self.reset_data,width=14,font=("times new roman",11,"bold"),bg="red",fg="white")
         reset_btn.grid(row=0,column=3)
 
         
@@ -402,55 +402,47 @@ class Student:
                 messagebox.showerror("Error",f"Due To: {str(es)}",parent=self.root)
                 
 
-    #Delete Details
-    # def delete_data(self):
-    #     if self.var_Student_Name.get():
-    #         messagebox.showerror("Error","Student Name Must Be Required",parent=self.root)
-    #     else:
-    #         try:
-    #             Delete=messagebox.askyesno("Delete Student Details","Are you Sure You Want To Delete This Student Details?",parent=self.root)
-    #             if Delete>0:
-    #                 conn=mysql.connector.connect(host="localhost",username="root",password="Gaurav@716",database="face_recognition")
-    #                 my_cursor=conn.cursor()
-    #                 sql="DELETE FROM Student WHERE Student_Name=%s"
-    #                 val=(self.var_Student_Name.get(),)
-    #                 my_cursor.execute(sql,val)
-    #             else:
-    #                 if not Delete:
-    #                     return
-                    
-    #             conn.commit()
-    #             self.fetch_data()
-    #             conn.close()
-    #             messagebox.showinfo("Delete","Successfully Deleted Student Details")
-
-    #         except Exception as es:
-    #             messagebox.showerror("Error",f"Due To: {str(es)}",parent=self.root)
-
-
-
-
-
-
-
-
-        
+    #Delete Details   
     def delete_data(self):
         if self.var_Student_Name.get() == "":
-            messagebox.showerror("Error", "Roll No. is Required!")
+            messagebox.showerror("Error", "Student Name is Required!")
         else:
             try:
-                conn = mysql.connector.connect(host="localhost", username="root", password="Gaurav@716", database="face_recognition")
-                my_cursor = conn.cursor()
-                sql = "DELETE FROM student WHERE `Student Name`=%s"
-                val = (self.var_Student_Name.get(),)
-                my_cursor.execute(sql, val)
+                Delete = messagebox.askyesno("Student Details Delete","Are You Sure You Want To Delete This Student?")
+                if Delete>0:
+                    conn = mysql.connector.connect(host="localhost", username="root", password="Gaurav@716", database="face_recognition")
+                    my_cursor = conn.cursor()
+                    sql = "DELETE FROM student WHERE `Student Name`=%s"
+                    val = (self.var_Student_Name.get(),)
+                    my_cursor.execute(sql, val)
+                else:
+                    if not Delete:
+                        return
+                    
                 conn.commit()
                 self.fetch_data()
                 conn.close()
-                messagebox.showinfo("Success", "Student details have been deleted successfully.")
+                messagebox.showinfo("Success", "Student Details Has Been Deleted Successfully",parent=self.root)
             except Exception as es:
                 messagebox.showerror("Error", f"Due To: {str(es)}")
+
+            
+    #Reset Details
+    def reset_data(self):
+        self.var_Branch.set("Select Branch")
+        self.var_Session.set("Select Session")
+        self.var_Year.set("Select Year")
+        self.var_Semester.set("Select Semester")
+        self.var_Student_Name.set("")
+        self.var_Roll_No.set("")
+        self.var_Gender.set("Select Gender")
+        self.var_DOB.set("")
+        self.var_Email.set("")
+        self.var_Mobile_No.set("")
+        self.var_Photo_Sample_Status.set("No")
+
+        self.fetch_data()
+
 
 
 
