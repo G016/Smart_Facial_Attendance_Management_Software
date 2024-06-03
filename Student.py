@@ -211,7 +211,7 @@ class Student:
         save_btn = Button(btn_frame,text="Save",command=self.add_data,width=16,font=("times new roman",11,"bold"),bg="red",fg="white")
         save_btn.grid(row=0,column=0)
 
-        update_btn = Button(btn_frame,text="Update",width=14,font=("times new roman",11,"bold"),bg="red",fg="white")
+        update_btn = Button(btn_frame,text="Update",command=self.update_data,width=14,font=("times new roman",11,"bold"),bg="red",fg="white")
         update_btn.grid(row=0,column=1)
 
         delete_btn = Button(btn_frame,text="Delete",width=14,font=("times new roman",11,"bold"),bg="red",fg="white")
@@ -366,11 +366,41 @@ class Student:
         self.var_DOB.set(data[7]),
         self.var_Email.set(data[8]),
         self.var_Mobile_No.set(data[9]),
-        self.var_Photo_Sample_Status.set(data[10]),
-        self.var_Rbtn1.set(data[11])
+        self.var_Rbtn1.set(data[10])
 
-            
-            
+
+    #Update Details
+    def update_data(self):
+        if self.var_Branch.get()=="Select Department" or self.var_Session.get()=="Select Session" or self.var_Year.get()=="Select Year" or self.var_Semester.get()=="Select Semester" or self.var_Student_Name.get()=="" or self.var_Roll_No.get()=="" or self.var_Gender.get()=="" or self.var_DOB.get()=="" or self.var_Email.get()=="" or self.var_Mobile_No.get()=="":
+            messagebox.showerror("Error","All Fields Are Required",parent=self.root)
+        else:
+            try:
+                Update=messagebox.askyesno("Update","Do You Want To Update This Student Details?",parent=self.root)
+                if Update>0:
+                    conn=mysql.connector.connect(host="localhost",username="root",password="Gaurav@716",database="face_recognition")
+                    my_cursor=conn.cursor()
+                    my_cursor.execute("UPDATE student SET Branch=%s, Session=%s, Year=%s, Semester=%s, `Roll No.`=%s, Gender=%s, DOB=%s, Email=%s, `Mobile No.`=%s, `Photo Sample Status`=%s WHERE `Student Name`=%s",(self.var_Branch.get(),
+                                                                                                                                                                                                                        self.var_Session.get(),
+                                                                                                                                                                                                                        self.var_Year.get(),
+                                                                                                                                                                                                                        self.var_Semester.get(),
+                                                                                                                                                                                                                        self.var_Roll_No.get(),
+                                                                                                                                                                                                                        self.var_Gender.get(),
+                                                                                                                                                                                                                        self.var_DOB.get(),
+                                                                                                                                                                                                                        self.var_Email.get(),
+                                                                                                                                                                                                                        self.var_Mobile_No.get(),
+                                                                                                                                                                                                                        self.var_Rbtn1.get(),
+                                                                                                                                                                                                                        self.var_Student_Name.get()
+                                                                                                                                                                                                                    ))
+                else:
+                    if not Update:
+                        return
+                messagebox.showinfo("Success","Student Details Successfully Updated",parent=self.root)
+                conn.commit()
+                self.fetch_data()
+                conn.close()
+            except Exception as es:
+                messagebox.showerror("Error",f"Due To: {str(es)}",parent=self.root)
+
 
 
 
