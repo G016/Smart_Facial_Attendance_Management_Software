@@ -449,72 +449,64 @@ class Student:
 
     #Take Photo Sample and Generating Datasets
     def generate_dataset(self):
-        if self.var_Branch.get()=="Select Department" or self.var_Session.get()=="Select Session" or self.var_Year.get()=="Select Year" or self.var_Semester.get()=="Select Semester" or self.var_Student_Name.get()=="" or self.var_Roll_No.get()=="" or self.var_Gender.get()=="" or self.var_DOB.get()=="" or self.var_Email.get()=="" or self.var_Mobile_No.get()=="":
-            messagebox.showerror("Error","All Fields Are Required",parent=self.root)
+        if self.var_Branch.get() == "Select Branch" or self.var_Session.get() == "Select Session" or self.var_Year.get() == "Select Year" or self.var_Semester.get() == "Select Semester" or self.var_Student_Name.get() == "" or self.var_Roll_No.get() == "" or self.var_Gender.get() == "Select Gender" or self.var_DOB.get() == "" or self.var_Email.get() == "" or self.var_Mobile_No.get() == "":
+            messagebox.showerror("Error", "All Fields are Required", parent=self.root)
         else:
             try:
-                conn=mysql.connector.connect(host="localhost",username="root",password="Gaurav@716",database="face_recognition")
-                my_cursor=conn.cursor()
+                conn = mysql.connector.connect(host="localhost", username="root", password="Gaurav@716", database="face_recognition")
+                my_cursor = conn.cursor()
                 my_cursor.execute("SELECT * FROM student")
                 myresult = my_cursor.fetchall()
-                id=0
+                id = 0
                 for x in myresult:
-                    id+=1
-                my_cursor.execute("UPDATE student SET Branch=%s, Session=%s, Year=%s, Semester=%s, `Roll No.`=%s, Gender=%s, DOB=%s, Email=%s, `Mobile No.`=%s, `Photo Sample Status`=%s WHERE `Student Name`=%s",(self.var_Branch.get(),
-                                                                                                                                                                                                                       self.var_Session.get(),
-                                                                                                                                                                                                                       self.var_Year.get(),
-                                                                                                                                                                                                                       self.var_Semester.get(),
-                                                                                                                                                                                                                       self.var_Roll_No.get(),
-                                                                                                                                                                                                                       self.var_Gender.get(),
-                                                                                                                                                                                                                       self.var_DOB.get(),
-                                                                                                                                                                                                                       self.var_Email.get(),
-                                                                                                                                                                                                                       self.var_Mobile_No.get(),
-                                                                                                                                                                                                                       self.var_Rbtn1.get(),
-                                                                                                                                                                                                                       self.var_Student_Name.get()==id+1
-                                                                                                                                                                                                                    )) 
+                    id += 1
+                my_cursor.execute("UPDATE student SET Branch=%s, Session=%s, Year=%s, Semester=%s, `Roll No.`=%s, Gender=%s, DOB=%s, Email=%s, `Mobile No.`=%s, `Photo Sample Status`=%s WHERE `Student Name`=%s", (
+                    self.var_Branch.get(),
+                    self.var_Session.get(),
+                    self.var_Year.get(),
+                    self.var_Semester.get(),
+                    self.var_Roll_No.get(),
+                    self.var_Gender.get(),
+                    self.var_DOB.get(),
+                    self.var_Email.get(),
+                    self.var_Mobile_No.get(),
+                    self.var_Photo_Sample_Status.get(),
+                    self.var_Student_Name.get()
+                ))
                 conn.commit()
                 self.fetch_data()
                 self.reset_data()
                 conn.close()
 
-
-    #Loading Datasets XML file from opencv
-                face_classifier = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+                # Load Predefined Data on Face Frontals from OpenCV
+                face_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
                 def face_cropped(img):
                     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-                    faces = face_classifier.detectMultiScale(gray,1.3,5)
-
-                    for (x,y,w,h) in faces:
-                        face_cropped = img[y:y+h,x:x+w]
+                    faces = face_classifier.detectMultiScale(gray, 1.3, 5)
+                    for (x, y, w, h) in faces:
+                        face_cropped = img[y:y + h, x:x + w]
                         return face_cropped
-                    
+
                 cap = cv2.VideoCapture(0)
                 img_id = 0
-
                 while True:
-                    ret,myframe=cap.read()
-                    if face_cropped(myframe) is not None:
+                    ret, my_frame = cap.read()
+                    if face_cropped(my_frame) is not None:
                         img_id += 1
-                        face = cv2.resize(face_cropped(myframe),(450,450))
-                        face = cv2.cvtColor(face,cv2.COLOR_BGR2GRAY)
-                        file_path = "Datasets/user."+str(id) + "."+str(img_id) + ".jpg"
-                        cv2.imwrite(file_path,face)
-                        cv2.putText(face,str(img_id),(50,50),cv2.FONT_HERSHEY_COMPLEX,2,(255,0,0),2)
-                        cv2.imshow("Cropped Face",face)
-
-                    if cv2.waitKey(1) == 12 or int(img_id) == 100:
+                        face = cv2.resize(face_cropped(my_frame), (450, 450))
+                        face = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
+                        file_path = "data/user." + str(id) + "." + str(img_id) + ".jpg"
+                        cv2.imwrite(file_path, face)
+                        cv2.putText(face, str(img_id), (50, 50), cv2.FONT_HERSHEY_COMPLEX, 2, (0, 255, 0), 2)
+                        cv2.imshow("Cropped Face", face)
+                    if cv2.waitKey(1) == 13 or int(img_id) == 100:
                         break
-
                 cap.release()
                 cv2.destroyAllWindows()
-                messagebox.showinfo("Result","Taking Photo Samples Completed")
-            
+                messagebox.showinfo("Result", "Generating Data Sets Completed Successfully", parent=self.root)
             except Exception as es:
-                messagebox.showinfo("Error",f"Due To: {str(es)}",parent=self.root)
-
-
-
+                messagebox.showerror("Error", f"Due To: {str(es)}", parent=self.root)
 
 
 
