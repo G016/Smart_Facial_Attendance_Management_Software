@@ -28,7 +28,7 @@ class Student:
 
 
     # 1st Image
-        img1=Image.open("D:/Study Materials/Projects/Smart Facial Attendance System/Images/college_images/AdobeStock_303989091.jpeg")
+        img1=Image.open("Images/AdobeStock_303989091.jpeg")
         img1=img1.resize((456,130),Image.Resampling.LANCZOS)
         self.photoimg1=ImageTk.PhotoImage(img1)
 
@@ -37,7 +37,7 @@ class Student:
 
 
     # 2nd Image
-        img2=Image.open("D:/Study Materials/Projects/Smart Facial Attendance System/Images/college_images/student-portal_1.jpg")
+        img2=Image.open("Images/student-portal_1.jpg")
         img2=img2.resize((456,130),Image.Resampling.LANCZOS)
         self.photoimg2=ImageTk.PhotoImage(img2)
 
@@ -46,7 +46,7 @@ class Student:
 
 
     # 3rd Image
-        img3=Image.open("D:/Study Materials/Projects/Smart Facial Attendance System/Images/college_images/facial-recognition_0.jpg")
+        img3=Image.open("Images/facial-recognition_0.jpg")
         img3=img3.resize((456,130),Image.Resampling.LANCZOS)
         self.photoimg3=ImageTk.PhotoImage(img3)
 
@@ -55,7 +55,7 @@ class Student:
 
 
     # Background Image
-        img4=Image.open("D:/Study Materials/Projects/Smart Facial Attendance System/Images/college_images/BG.jpg")
+        img4=Image.open("Images/BG.jpg")
         img4=img4.resize((1360,620),Image.Resampling.LANCZOS)
         self.photoimg4=ImageTk.PhotoImage(img4)
 
@@ -496,7 +496,7 @@ class Student:
                         img_id += 1
                         face = cv2.resize(face_cropped(my_frame), (450, 450))
                         face = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
-                        file_path = "data/user." + str(id) + "." + str(img_id) + ".jpg"
+                        file_path = "Datasets/user." + str(id) + "." + str(img_id) + ".jpg"
                         cv2.imwrite(file_path, face)
                         cv2.putText(face, str(img_id), (50, 50), cv2.FONT_HERSHEY_COMPLEX, 2, (0, 255, 0), 2)
                         cv2.imshow("Cropped Face", face)
@@ -507,36 +507,6 @@ class Student:
                 messagebox.showinfo("Result", "Generating Data Sets Completed Successfully", parent=self.root)
             except Exception as es:
                 messagebox.showerror("Error", f"Due To: {str(es)}", parent=self.root)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 if __name__ == "__main__":

@@ -2,6 +2,7 @@ from tkinter import*
 from tkinter import ttk
 from PIL import Image,ImageTk
 from Student import Student
+import os
 
 
 class Face_Recognition_System:
@@ -12,7 +13,7 @@ class Face_Recognition_System:
 
 
     # 1st Image
-        img1=Image.open("D:/Study Materials/Projects/Smart Facial Attendance System/Images/college_images/2-AI-invades-automobile-industry-in-2019.jpeg")
+        img1=Image.open("Images/2-AI-invades-automobile-industry-in-2019.jpeg")
         img1=img1.resize((456,130),Image.Resampling.LANCZOS)
         self.photoimg1=ImageTk.PhotoImage(img1)
 
@@ -21,7 +22,7 @@ class Face_Recognition_System:
 
 
     # 2nd Image
-        img2=Image.open("D:/Study Materials/Projects/Smart Facial Attendance System/Images/college_images/u.jpg")
+        img2=Image.open("Images/u.jpg")
         img2=img2.resize((456,130),Image.Resampling.LANCZOS)
         self.photoimg2=ImageTk.PhotoImage(img2)
 
@@ -30,7 +31,7 @@ class Face_Recognition_System:
 
 
     # 3rd Image
-        img3=Image.open("D:/Study Materials/Projects/Smart Facial Attendance System/Images/college_images/images.jpg")
+        img3=Image.open("Images/images.jpg")
         img3=img3.resize((456,130),Image.Resampling.LANCZOS)
         self.photoimg3=ImageTk.PhotoImage(img3)
 
@@ -39,7 +40,7 @@ class Face_Recognition_System:
 
 
     # Background Image
-        img4=Image.open("D:/Study Materials/Projects/Smart Facial Attendance System/Images/college_images/BG.jpg")
+        img4=Image.open("Images/BG.jpg")
         img4=img4.resize((1360,620),Image.Resampling.LANCZOS)
         self.photoimg4=ImageTk.PhotoImage(img4)
 
@@ -51,7 +52,7 @@ class Face_Recognition_System:
 
 
     # Student Button
-        img5=Image.open("D:/Study Materials/Projects/Smart Facial Attendance System/Images/college_images/student1.jpg")
+        img5=Image.open("Images/student1.jpg")
         img5=img5.resize((160,160),Image.Resampling.LANCZOS)
         self.photoimg5=ImageTk.PhotoImage(img5)
 
@@ -63,7 +64,7 @@ class Face_Recognition_System:
 
 
      # Detect Face Button
-        img6=Image.open("D:/Study Materials/Projects/Smart Facial Attendance System/Images/college_images/Face_detecter.jpg")
+        img6=Image.open("Images/Face_detecter.jpg")
         img6=img6.resize((160,160),Image.Resampling.LANCZOS)
         self.photoimg6=ImageTk.PhotoImage(img6)
 
@@ -75,7 +76,7 @@ class Face_Recognition_System:
 
 
     # Attendance Button
-        img7=Image.open("D:/Study Materials/Projects/Smart Facial Attendance System/Images/college_images/iStock-182059956_18390_t12.jpg")
+        img7=Image.open("Images/iStock-182059956_18390_t12.jpg")
         img7=img7.resize((160,160),Image.Resampling.LANCZOS)
         self.photoimg7=ImageTk.PhotoImage(img7)
 
@@ -87,7 +88,7 @@ class Face_Recognition_System:
 
 
     # Help Button
-        img8=Image.open("D:/Study Materials/Projects/Smart Facial Attendance System/Images/college_images/HELP.png")
+        img8=Image.open("Images/HELP.png")
         img8=img8.resize((160,160),Image.Resampling.LANCZOS)
         self.photoimg8=ImageTk.PhotoImage(img8)
 
@@ -99,7 +100,7 @@ class Face_Recognition_System:
 
 
     # Train Data Button
-        img9=Image.open("D:/Study Materials/Projects/Smart Facial Attendance System/Images/college_images/Train Data.jpg")
+        img9=Image.open("Images/Train Data.jpg")
         img9=img9.resize((160,160),Image.Resampling.LANCZOS)
         self.photoimg9=ImageTk.PhotoImage(img9)
 
@@ -111,19 +112,19 @@ class Face_Recognition_System:
 
 
      # Photos Button
-        img10=Image.open("D:/Study Materials/Projects/Smart Facial Attendance System/Images/college_images/Photos.png")
+        img10=Image.open("Images/Photos.png")
         img10=img10.resize((160,160),Image.Resampling.LANCZOS)
         self.photoimg10=ImageTk.PhotoImage(img10)
 
-        b2 = Button(bg_img,image=self.photoimg10,cursor="spider red")
+        b2 = Button(bg_img,image=self.photoimg10,cursor="spider red",command=self.open_img)
         b2.place(x=460,y=330,width=160,height=160)
 
-        b2_FD = Button(bg_img,text="Photos",cursor="spider red",font=("times new roman",11,"bold"),bg="light cyan")
+        b2_FD = Button(bg_img,text="Photos",cursor="spider red",command=self.open_img,font=("times new roman",11,"bold"),bg="light cyan")
         b2_FD.place(x=460,y=480,width=160,height=20)
 
 
      # Developer Button
-        img11=Image.open("D:/Study Materials/Projects/Smart Facial Attendance System/Images/college_images/Developer.jpeg")
+        img11=Image.open("Images/Developer.jpeg")
         img11=img11.resize((160,160),Image.Resampling.LANCZOS)
         self.photoimg11=ImageTk.PhotoImage(img11)
 
@@ -135,7 +136,7 @@ class Face_Recognition_System:
 
 
      # Exit Button
-        img12=Image.open("D:/Study Materials/Projects/Smart Facial Attendance System/Images/college_images/Exit.png")
+        img12=Image.open("Images/Exit.png")
         img12=img12.resize((160,160),Image.Resampling.LANCZOS)
         self.photoimg12=ImageTk.PhotoImage(img12)
 
@@ -145,14 +146,17 @@ class Face_Recognition_System:
         b2_FD = Button(bg_img,text="Exit",cursor="spider red",font=("times new roman",11,"bold"),bg="light cyan")
         b2_FD.place(x=980,y=480,width=160,height=20)
 
+
+    #Open Photo Sample File
+    def open_img(self):
+        os.startfile("Datasets")
+
     
     #Function Button
     def student_details(self):
         self.new_window=Toplevel(self.root)
         self.app=Student(self.new_window)
     
-
-
 
 if __name__ == "__main__":
     root=Tk()
