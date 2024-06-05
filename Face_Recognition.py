@@ -75,7 +75,7 @@ class Face_Recognition:
                 else:
                     b = "Unknown"
 
-                if confidence > 77:
+                if confidence > 76:
                     cv2.putText(img, f"Student Name:{n}", (x, y - 80), cv2.FONT_HERSHEY_COMPLEX, 0.8, (64, 15, 223), 2)
                     cv2.putText(img, f"Roll No.:{r}", (x, y - 55), cv2.FONT_HERSHEY_COMPLEX, 0.8, (64, 15, 223), 2)
                     cv2.putText(img, f"Branch:{b}", (x, y - 30), cv2.FONT_HERSHEY_COMPLEX, 0.8, (64, 15, 223), 2)
