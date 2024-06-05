@@ -62,7 +62,7 @@ class Student:
         bg_img=Label(self.root,image=self.photoimg4)
         bg_img.place(x=0,y=130,width=1360,height=620)
 
-        title_label=Label(bg_img,text="Student Management System",font=("times new roman",36,"bold"),bg="light cyan",fg="red")
+        title_label=Label(bg_img,text="STUDENT MANAGEMENT SYST",font=("times new  roman",36,"bold"),bg="light cyan",fg="red")
         title_label.place(x=0,y=0,width=1360,height=50)
 
 
@@ -313,7 +313,7 @@ class Student:
 
     #Function Declaration
     def add_data(self):
-        if self.var_Branch.get()=="Select Department" or self.var_Session.get()=="Select Session" or self.var_Year.get()=="Select Year" or self.var_Semester.get()=="Select Semester" or self.var_Student_Name.get()=="" or self.var_Roll_No.get()=="" or self.var_Gender.get()=="" or self.var_DOB.get()=="" or self.var_Email.get()=="" or self.var_Mobile_No.get()=="":
+        if self.var_Branch.get()=="Select Branch" or self.var_Session.get()=="Select Session" or self.var_Year.get()=="Select Year" or self.var_Semester.get()=="Select Semester" or self.var_Student_Name.get()=="" or self.var_Roll_No.get()=="" or self.var_Gender.get()=="" or self.var_DOB.get()=="" or self.var_Email.get()=="" or self.var_Mobile_No.get()=="":
             messagebox.showerror("Error","All Fields Are Required",parent=self.root)
         else:
             try:
@@ -373,7 +373,7 @@ class Student:
 
     #Update Details
     def update_data(self):
-        if self.var_Branch.get()=="Select Department" or self.var_Session.get()=="Select Session" or self.var_Year.get()=="Select Year" or self.var_Semester.get()=="Select Semester" or self.var_Student_Name.get()=="" or self.var_Roll_No.get()=="" or self.var_Gender.get()=="" or self.var_DOB.get()=="" or self.var_Email.get()=="" or self.var_Mobile_No.get()=="":
+        if self.var_Branch.get()=="Select Branch" or self.var_Session.get()=="Select Session" or self.var_Year.get()=="Select Year" or self.var_Semester.get()=="Select Semester" or self.var_Student_Name.get()=="" or self.var_Roll_No.get()=="" or self.var_Gender.get()=="" or self.var_DOB.get()=="" or self.var_Email.get()=="" or self.var_Mobile_No.get()=="":
             messagebox.showerror("Error","All Fields Are Required",parent=self.root)
         else:
             try:

@@ -1,7 +1,9 @@
 from tkinter import *
+from sys import path
 from tkinter import ttk
 from PIL import Image, ImageTk
 from tkinter import messagebox
+import mysql.connector
 import os
 import numpy as np
 import cv2
@@ -15,7 +17,7 @@ class Train:
 
 
     #Title
-        title_label = Label(self.root, text="Train Datasets", font=("times new roman", 36, "bold"), bg="light cyan", fg="red")
+        title_label = Label(self.root, text="TRAIN DATASETS", font=("times new roman", 36, "bold"), bg="light cyan", fg="red")
         title_label.place(x=0, y=0, width=1360, height=50)
 
 

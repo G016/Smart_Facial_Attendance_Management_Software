@@ -3,6 +3,7 @@ from tkinter import ttk
 from PIL import Image,ImageTk
 from Student import Student
 from Train import Train
+from Face_Recognition import Face_Recognition
 import os
 
 
@@ -48,7 +49,7 @@ class Face_Recognition_System:
         bg_img=Label(self.root,image=self.photoimg4)
         bg_img.place(x=0,y=130,width=1360,height=620)
 
-        title_label=Label(bg_img,text="Face Recognition Attendance System Software",font=("times new roman",36,"bold"),bg="light cyan",fg="red")
+        title_label=Label(bg_img,text="FACE RECOGNITION ATTENDANCE SYSTEM SOFTWARE",font=("times new roman",36,"bold"),bg="light cyan",fg="red")
         title_label.place(x=0,y=0,width=1360,height=50)
 
 
@@ -69,10 +70,10 @@ class Face_Recognition_System:
         img6=img6.resize((160,160),Image.Resampling.LANCZOS)
         self.photoimg6=ImageTk.PhotoImage(img6)
 
-        b2 = Button(bg_img,image=self.photoimg6,cursor="spider red")
+        b2 = Button(bg_img,image=self.photoimg6,cursor="spider red",command=self.face_data)
         b2.place(x=460,y=100,width=160,height=160)
 
-        b2_FD = Button(bg_img,text="Detect Face",cursor="spider red",font=("times new roman",11,"bold"),bg="light cyan")
+        b2_FD = Button(bg_img,text="Detect Face",cursor="spider red",command=self.face_data,font=("times new roman",11,"bold"),bg="light cyan")
         b2_FD.place(x=460,y=250,width=160,height=20)
 
 
@@ -163,6 +164,11 @@ class Face_Recognition_System:
         self.new_window=Toplevel(self.root)
         self.app=Train(self.new_window)
     
+
+    def face_data(self):
+        self.new_window=Toplevel(self.root)
+        self.app=Face_Recognition(self.new_window)
+
 
 if __name__ == "__main__":
     root=Tk()
