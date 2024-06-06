@@ -13,7 +13,7 @@ class Developer:
         self.root.geometry("1360x750+0+0")
 
     #Title
-        title_label = Label(self.root, text="DEVELOPER", font=("times new roman", 36, "bold"), bg="light cyan", fg="red")
+        title_label = Label(self.root, text="DEVELOPER", font=("times new roman", 36, "bold"), bg="light cyan", fg="black")
         title_label.place(x=0, y=0, width=1360, height=50)
 
 

@@ -59,6 +59,9 @@ class Face_Recognition_System:
         title_label=Label(bg_img,text="FACE RECOGNITION ATTENDANCE SYSTEM SOFTWARE",font=("times new roman",36,"bold"),bg="light cyan",fg="red")
         title_label.place(x=0,y=0,width=1360,height=50)
 
+        tlabel=Label(bg_img,text="Developed By: Gaurav Kumar Verma",font=("times new roman",12,"bold"),bg="light cyan",fg="black")
+        tlabel.place(x=0,y=545,width=260,height=20)
+
         def time():
             string=strftime('%H:%M:%S %p')
             lbl.config(text=string)

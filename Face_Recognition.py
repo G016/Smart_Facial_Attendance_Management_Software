@@ -15,7 +15,7 @@ class Face_Recognition:
         self.root.geometry("1360x750+0+0")
 
         # Title
-        title_label = Label(self.root, text="FACE RECOGNITION", font=("times new roman", 36, "bold"), bg="light cyan", fg="red")
+        title_label = Label(self.root, text="FACE RECOGNITION", font=("times new roman", 36, "bold"), bg="navy", fg="white")
         title_label.place(x=0, y=0, width=1360, height=50)
 
         # 1st Image
