@@ -8,6 +8,8 @@ from Face_Recognition import Face_Recognition
 from Attendance import Attendance
 from Developer import Developer
 from Help import Help
+from datetime import datetime
+from time import strftime
 import os
 import tkinter
 
@@ -56,6 +58,15 @@ class Face_Recognition_System:
 
         title_label=Label(bg_img,text="FACE RECOGNITION ATTENDANCE SYSTEM SOFTWARE",font=("times new roman",36,"bold"),bg="light cyan",fg="red")
         title_label.place(x=0,y=0,width=1360,height=50)
+
+        def time():
+            string=strftime('%H:%M:%S %p')
+            lbl.config(text=string)
+            lbl.after(1000,time)
+
+        lbl = Label(bg_img,font=('times new roman',13,'bold'),background='lightcyan',foreground='black')
+        lbl.place(x=0,y=50,width=100,height=30)
+        time()
 
 
     # Student Button

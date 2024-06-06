@@ -2,6 +2,8 @@ from tkinter import*
 from tkinter import ttk
 from PIL import Image,ImageTk
 from tkinter import messagebox
+from datetime import datetime
+from time import strftime
 import mysql.connector
 import cv2
 
@@ -64,6 +66,15 @@ class Student:
 
         title_label=Label(bg_img,text="STUDENT MANAGEMENT SYSTEM",font=("times new  roman",36,"bold"),bg="light cyan",fg="red")
         title_label.place(x=0,y=0,width=1360,height=50)
+
+        def time():
+            string=strftime('%H:%M:%S %p')
+            lbl.config(text=string)
+            lbl.after(1000,time)
+
+        lbl = Label(title_label,font=('times new roman',13,'bold'),background='light cyan',foreground='Black')
+        lbl.place(x=0,y=(-8),width=100,height=30)
+        time()
 
 
     #Frame
