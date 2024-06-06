@@ -44,11 +44,11 @@ class Face_Recognition:
             mydatalist = f.readlines()
             name_list = []
             for line in mydatalist:
-                entry = line.split(",")
+                entry = line.split((","))
                 name_list.append(entry[0])
             if ((n not in name_list) and (r not in name_list) and (b not in name_list)):
                 now = datetime.now()
-                d1 = now.strftime("%d%m%Y")
+                d1 = now.strftime("%d/%m/%Y")
                 dtstring = now.strftime("%H:%M:%S")
                 f.writelines(f"\n{n},{r},{b},{dtstring},{d1},Present")
 

@@ -62,7 +62,7 @@ class Student:
         bg_img=Label(self.root,image=self.photoimg4)
         bg_img.place(x=0,y=130,width=1360,height=620)
 
-        title_label=Label(bg_img,text="STUDENT MANAGEMENT SYST",font=("times new  roman",36,"bold"),bg="light cyan",fg="red")
+        title_label=Label(bg_img,text="STUDENT MANAGEMENT SYSTEM",font=("times new  roman",36,"bold"),bg="light cyan",fg="red")
         title_label.place(x=0,y=0,width=1360,height=50)
 
 
