@@ -3,6 +3,8 @@ from tkinter import ttk
 from PIL import Image,ImageTk
 from tkinter import messagebox
 from tkinter import filedialog
+from time import strftime
+from datetime import datetime
 import mysql.connector
 import cv2
 import os
