@@ -1,8 +1,8 @@
-from sys import path
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
 from tkinter import messagebox
+from datetime import datetime
 import os
 import numpy as np
 import cv2
@@ -32,14 +32,29 @@ class Face_Recognition:
         self.photoimg2 = ImageTk.PhotoImage(img2)
 
         label_2 = Label(self.root, image=self.photoimg2)
-        label_2.place(x=560, y=50, width=800, height=650)
+        label_2.place(x=560, y=50, width=800, height=650)       
 
         # Recognize Face Button
         b_FD = Button(label_2, text="Recognize Face", command=self.face_recog, cursor="hand2", fg="white", font=("times new roman", 16, "bold"), bg="blue")
         b_FD.place(x=300, y=570, width=200, height=40)
 
+    # Attendance
+    def mark_attendance(self, n, r, b):
+        with open("Attendance.csv", "r+", newline="\n") as f:
+            mydatalist = f.readlines()
+            name_list = []
+            for line in mydatalist:
+                entry = line.split(",")
+                name_list.append(entry[0])
+            if ((n not in name_list) and (r not in name_list) and (b not in name_list)):
+                now = datetime.now()
+                d1 = now.strftime("%d%m%Y")
+                dtstring = now.strftime("%H:%M:%S")
+                f.writelines(f"\n{n},{r},{b},{dtstring},{d1},Present")
+
+    # Face Recognition
     def face_recog(self):
-        def draw_boundray(img, classifier, scaleFactor, minNeighbors, color, text, clf):
+        def draw_boundary(img, classifier, scaleFactor, minNeighbors, color, text, clf):
             gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             features = classifier.detectMultiScale(gray_image, scaleFactor, minNeighbors)
 
@@ -79,7 +94,7 @@ class Face_Recognition:
                     cv2.putText(img, f"Student Name:{n}", (x, y - 80), cv2.FONT_HERSHEY_COMPLEX, 0.8, (64, 15, 223), 2)
                     cv2.putText(img, f"Roll No.:{r}", (x, y - 55), cv2.FONT_HERSHEY_COMPLEX, 0.8, (64, 15, 223), 2)
                     cv2.putText(img, f"Branch:{b}", (x, y - 30), cv2.FONT_HERSHEY_COMPLEX, 0.8, (64, 15, 223), 2)
-
+                    self.mark_attendance(n, r, b)
                 else:
                     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 3)
                     cv2.putText(img, "Unknown Face", (x, y - 5), cv2.FONT_HERSHEY_COMPLEX, 0.8, (255, 255, 0), 3)
@@ -88,26 +103,25 @@ class Face_Recognition:
 
             return coord
 
-        def recognize(img,clf,faceCascade):
-            coord=draw_boundray(img,faceCascade,1.1,10,(255,25,255),"Face",clf)
+        def recognize(img, clf, faceCascade):
+            coord = draw_boundary(img, faceCascade, 1.1, 10, (255, 25, 255), "Face", clf)
             return img
         
-        faceCascade=cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
-        clf=cv2.face.LBPHFaceRecognizer_create()
+        faceCascade = cv2.CascadeClassifier("haarcascade_frontalface_default.xml")
+        clf = cv2.face.LBPHFaceRecognizer_create()
         clf.read("classifier.xml")
 
-        videoCap=cv2.VideoCapture(0)
+        videoCap = cv2.VideoCapture(0)
 
         while True:
-            ret,img=videoCap.read()
-            img=recognize(img,clf,faceCascade)
-            cv2.imshow("Face Detector",img)
+            ret, img = videoCap.read()
+            img = recognize(img, clf, faceCascade)
+            cv2.imshow("Face Detector", img)
 
             if cv2.waitKey(1) == 13:
                 break
         videoCap.release()
         cv2.destroyAllWindows()  
-
 
 if __name__ == "__main__":
     root = Tk()
